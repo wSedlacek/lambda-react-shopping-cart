@@ -5,6 +5,8 @@ import * as uuid from 'uuid';
 import { data } from './data';
 import { Book } from './models/Book';
 
+import { useLocalStorage } from './hooks/local-storage.hook';
+
 import { CartProvider } from './contexts/CartContext';
 import { ProductProvider } from './contexts/ProductContext';
 
@@ -14,7 +16,7 @@ import { ShoppingCart } from './components/shopping-cart/shopping-cart.component
 
 function App() {
   const [products] = React.useState<Book[]>(data);
-  const [cart, setCart] = React.useState<Book[]>([]);
+  const [cart, setCart] = useLocalStorage<Book[]>('cart', []);
 
   const addItem = (item: Book) => {
     const newItem: Book = { ...item, uuid: uuid.v1() };
