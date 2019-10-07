@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { data } from './data';
+import * as uuid from 'uuid';
 
+import { data } from './data';
 import { Book } from './models/Book';
 
 import { CartProvider } from './contexts/CartContext';
@@ -16,13 +17,18 @@ function App() {
   const [cart, setCart] = React.useState<Book[]>([]);
 
   const addItem = (item: Book) => {
-    setCart([...cart, item]);
+    const newItem: Book = { ...item, uuid: uuid.v1() };
+    setCart([...cart, newItem]);
+  };
+
+  const removeItem = (item: Book) => {
+    setCart(cart.filter((book) => book.uuid !== item.uuid));
   };
 
   return (
     <>
       <Router>
-        <CartProvider value={cart}>
+        <CartProvider value={{ cart: cart, removeItem: removeItem }}>
           <Navigation />
           <Route path='/cart' component={ShoppingCart} />
         </CartProvider>

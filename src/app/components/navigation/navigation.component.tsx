@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { CartContext } from '../../contexts/CartContext';
 
 const Navigation = () => {
-  const cart = React.useContext(CartContext);
+  const { cart } = React.useContext(CartContext);
 
   return (
     <div className='navigation'>

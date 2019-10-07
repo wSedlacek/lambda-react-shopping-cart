@@ -1,15 +1,20 @@
 import React from 'react';
 import { Book } from '../../../../models/Book';
 
-const Item = (props: Book) => {
+type ItemProps = {
+  item: Book;
+  removeItem: (item: Book) => void;
+};
+
+const Item = (props: ItemProps) => {
   return (
     <div className='shopping-cart_item'>
-      <img src={props.image} alt={`${props.title} book`} />
+      <img src={props.item.image} alt={`${props.item.title} book`} />
 
       <div>
-        <h1>{props.title}</h1>
-        <p>$ {props.price}</p>
-        <button>Remove from cart</button>
+        <h1>{props.item.title}</h1>
+        <p>$ {props.item.price}</p>
+        <button onClick={() => props.removeItem(props.item)}>Remove from cart</button>
       </div>
     </div>
   );
