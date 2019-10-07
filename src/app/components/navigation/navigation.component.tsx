@@ -3,18 +3,16 @@ import './navigation.component.scss';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { Book } from '../../models/Book';
+import { CartContext } from '../../contexts/CartContext';
 
-type NavigationProps = {
-  cart: Book[];
-};
+const Navigation = () => {
+  const cart = React.useContext(CartContext);
 
-const Navigation = (props: NavigationProps) => {
   return (
     <div className='navigation'>
       <NavLink to='/'>Products</NavLink>
       <NavLink to='/cart'>
-        Cart <span>{props.cart.length}</span>
+        Cart <span>{cart.length}</span>
       </NavLink>
     </div>
   );
