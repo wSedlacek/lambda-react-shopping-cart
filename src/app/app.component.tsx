@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { data } from './data';
 
 import { Book } from './models/Book';
@@ -20,16 +20,18 @@ function App() {
   };
 
   return (
-    <div className='App'>
-      <CartProvider value={cart}>
-        <Navigation />
-        <Route path='/cart' component={ShoppingCart} />
-      </CartProvider>
+    <>
+      <Router>
+        <CartProvider value={cart}>
+          <Navigation />
+          <Route path='/cart' component={ShoppingCart} />
+        </CartProvider>
 
-      <ProductProvider value={{ products, addItem }}>
-        <Route exact path='/' component={Products} />
-      </ProductProvider>
-    </div>
+        <ProductProvider value={{ products, addItem }}>
+          <Route exact path='/' component={Products} />
+        </ProductProvider>
+      </Router>
+    </>
   );
 }
 
